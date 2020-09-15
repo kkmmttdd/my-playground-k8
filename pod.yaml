@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: kubia
+  ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: kubia-6c68d68756
+      uid: bcc698cd-541a-4854-bc35-287ee541c619
+spec:
+  containers:
+    - image: luksa/kubia
+      name: kubia
