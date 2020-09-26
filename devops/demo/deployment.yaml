@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: demo
+  template:
+    metadata:
+      labels:
+        app: demo
+    spec:
+      containers:
+        - name:  demo
+          image: luksa/kubia
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - mountPath: /config/
+              name: demo-config-volume
+              readOnly: true
+      volumes:
+        - name: demo-config-volume
+          configMap:
+            name: demo-config
+            items:
+              - key: config
+                path: demo.yaml
