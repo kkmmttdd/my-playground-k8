@@ -8,9 +8,11 @@ spec:
   - image: nginx
     name: nginx
     volumeMounts:
-    - mountPath: /etc/nginx/conf.d
+    - name: nginx-config
+      mountPath: /etc/nginx/conf.d
 #      subPath: myconfig.conf
-      name: nginx-config
+    - name: certs
+      mountPath: /etc/nginx/certs/
     ports:
     - containerPort: 80
       protocol: TCP
@@ -24,3 +26,7 @@ spec:
       items:
       - key: my-nginx-config.conf
         path: gzip.conf
+  - name: certs
+    secret:
+      secretName: https
+
